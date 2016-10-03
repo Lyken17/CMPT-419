@@ -3,7 +3,7 @@ import numpy as np
 import scipy
 import matplotlib.pyplot as plt
 
-from utilities import construct_sigmoid_array, polynomial_regression, polynomial_regression_with_regularization
+from utilities import *
 
 (countries, features, values) = a1.load_unicef_data()
 
@@ -12,7 +12,7 @@ x = values[:,:]
 # x = a1.normalize_data(x)
 
 feature=10
-N_TRAIN = 100;
+N_TRAIN = 100
 x_train = x[0:N_TRAIN, feature]
 t_train = targets[0:N_TRAIN]
 x_test = x[N_TRAIN:, feature]
