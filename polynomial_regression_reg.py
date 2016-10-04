@@ -38,13 +38,13 @@ for temp_lambda in r:
         s2 = sta_pos[(idx+1) % 10]
         e2 = end_pos[(idx+1) % 10]
         # print s1, e1, s2, e2
-        new_x_train = x_train[s1:e1]
-        new_t_train = t_train[s1:e1]
-        new_x_test = x_test[s2:e2]
-        new_t_test = t_test[s2:e2]
+        new_x_train = np.concatenate((x_train[:s2], x_train[e2:]), axis=0)
+        new_t_train = np.concatenate((t_train[:s2], t_train[e2:]), axis=0)
+        new_x_test = x_train[s2:e2]
+        new_t_test = t_train[s2:e2]
         # with regularization
         w, err_train, err_test = polynomial_regression_with_regularization( \
-                            temp_lambda, new_x_train, new_t_train, new_x_test, new_t_test, degree=3)
+                            temp_lambda, new_x_train, new_t_train, new_x_test, new_t_test, degree=2)
 
         err_test_collection[idx] = err_test
         err_train_collection[idx] = err_train

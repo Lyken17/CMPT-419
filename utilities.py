@@ -54,16 +54,16 @@ def polynomial_regression(Xtr, ytr, Xte, yte, degree=1, constant=True):
 def polynomial_regression_with_regularization(R, Xtr, ytr, Xte, yte, degree=1, constant=True):
     """
 
-        Args:
-            R : the lambda that controls regularization
-            Xtr: matrix of training data.   N * M
-            ytr: matrix of training answer. N * 1
-            Xte: matrix of testing data.    K * M
-            yte: matrix of testing answer.  K * 1
-            degree: the maximal degree that the data will be augmented.
+    Args:
+        R : the lambda that controls regularization
+        Xtr: matrix of training data.   N * M
+        ytr: matrix of training answer. N * 1
+        Xte: matrix of testing data.    K * M
+        yte: matrix of testing answer.  K * 1
+        degree: the maximal degree that the data will be augmented.
 
-        Returns:
-            W: weights that minimise the least square error. M * 1
+    Returns:
+        W: weights that minimise the least square error. M * 1
 
     """
     X_tr = add_constant(poly_attach(Xtr, degree)) if constant else poly_attach(Xtr, degree)
