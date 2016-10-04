@@ -82,14 +82,14 @@ def polynomial_regression_with_regularization(R, Xtr, ytr, Xte, yte, degree=1, c
 
 def sigmoid(t, u, s):
     from math import exp
-    y = float(t + u) / s
+    y = float(u - t) / s
     return 1.0 / (1.0 + exp(y))
 
 
 def vectorized_sigmoid(arr, u, s):
     """
 
-    sigmoid = 1 / (1 + exp(-(u + x) / s)
+    sigmoid = 1 / (1 + exp(u - x) / s)
     Args:
         arr: array
         u: center shift

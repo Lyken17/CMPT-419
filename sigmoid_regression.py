@@ -25,12 +25,12 @@ r = (0.01, 0.1, 1, 10, 100, 1000, 1000)
 
 new_x_train = construct_sigmoid_array(x_train, u, s)
 new_x_test = construct_sigmoid_array(x_test, u, s)
-r = (0.01, 0.1, 1, 10, 100, 1000, 1000)
+
 
 # without regularization
 w, err_train, err_test = polynomial_regression(new_x_train, t_train, new_x_test, t_test)
 # with regularization
-
+print err_train, err_test
 # Plot a curve showing learned function.
 # Use linspace to get a set of samples on which to evaluate
 x_ev = np.linspace(np.asscalar(min(x_test)), np.asscalar(max(x_test)), num=500)
