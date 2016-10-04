@@ -13,7 +13,6 @@ targets = values[:,1]
 x = values[:,7:]
 # x = a1.normalize_data(x)
 
-
 N_TRAIN = 100;
 x_train = x[0:N_TRAIN,:]
 x_test = x[N_TRAIN:,:]
@@ -23,7 +22,7 @@ t_test = targets[N_TRAIN:]
 train_err = dict()
 test_err = dict()
 for i in xrange(1, 7):
-    w, err_train, err_test = polynomial_regression(x_train, t_train, x_test,t_test, degree=i)
+    w, err_train, err_test = polynomial_regression(x_train, t_train, x_test, t_test, degree=i)
     train_err[i] = err_train
     test_err[i] = err_test
 

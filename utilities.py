@@ -1,6 +1,8 @@
 import numpy as np
 import scipy
 
+def add_constant(X):
+    return np.concatenate((X, np.ones((X.shape[0], 1))), axis=1)
 
 def poly_attach(X, n=1):
     """
@@ -23,7 +25,7 @@ def poly_attach(X, n=1):
     # reduce(lambda a,b: np.concatenate((a,b), axis=1), [np.power(a, i) for i in xrange(1, n+1)])
     return np.matrix(ans)
 
-def polynomial_regression(Xtr, ytr, Xte, yte, degree=1):
+def polynomial_regression(Xtr, ytr, Xte, yte, degree=1, constant=True):
     """
 
     Args:
@@ -37,9 +39,9 @@ def polynomial_regression(Xtr, ytr, Xte, yte, degree=1):
         W: weights that minimise the least square error. M * 1
 
     """
-    X_tr = poly_attach(Xtr, degree)
+    X_tr = add_constant(poly_attach(Xtr, degree)) if constant else poly_attach(Xtr, degree)
     y_tr = ytr
-    X_te = poly_attach(Xte, degree)
+    X_te = add_constant(poly_attach(Xte, degree)) if constant else poly_attach(Xte, degree)
     y_te = yte
     # print X_tr.shape, y_tr.shape
 
@@ -49,7 +51,7 @@ def polynomial_regression(Xtr, ytr, Xte, yte, degree=1):
 
     return w, err_train, err_test
 
-def polynomial_regression_with_regularization(R, Xtr, ytr, Xte, yte, degree=1):
+def polynomial_regression_with_regularization(R, Xtr, ytr, Xte, yte, degree=1, constant=True):
     """
 
         Args:
@@ -64,9 +66,9 @@ def polynomial_regression_with_regularization(R, Xtr, ytr, Xte, yte, degree=1):
             W: weights that minimise the least square error. M * 1
 
     """
-    X_tr = poly_attach(Xtr, degree)
+    X_tr = add_constant(poly_attach(Xtr, degree)) if constant else poly_attach(Xtr, degree)
     y_tr = ytr
-    X_te = poly_attach(Xte, degree)
+    X_te = add_constant(poly_attach(Xte, degree)) if constant else poly_attach(Xte, degree)
     y_te = yte
     # print X_tr.shape, y_tr.shape
     temp = X_tr.T * X_tr
@@ -91,10 +93,10 @@ def vectorized_sigmoid(arr, u, s):
     Args:
         arr: array
         u: center shift
-        s: range shrink
+        s: range scale
 
     Returns:
-        apply sigmoid function to every elements in arr
+        apply sigmoid function to each element in arr
 
     """
     vfunc = np.vectorize(sigmoid)
@@ -103,7 +105,8 @@ def vectorized_sigmoid(arr, u, s):
 
 def construct_sigmoid_array(arr, u, s):
     ans = [vectorized_sigmoid(arr, it, s) for it in u]
-    return reduce(lambda a,b: np.concatenate((a,b), axis=1), ans)
+    temp = reduce(lambda a,b: np.concatenate((a,b), axis=1), ans)
+    return temp
 
 
 if __name__ == "__main__":

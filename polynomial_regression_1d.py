@@ -62,7 +62,7 @@ for feature in (10, 11, 12 ,13):
     # Use linspace to get a set of samples on which to evaluate
     x_ev = np.linspace(np.asscalar(min(x_test)), np.asscalar(max(x_test)), num=500)
     temp = x_ev.reshape(500, 1)
-    temp = poly_attach(temp, 3)
+    temp = add_constant(poly_attach(temp, 3))
 
     # TO DO:: Put your regression estimate here in place of x_ev.
     # Evaluate regression on the linspace samples.

@@ -3,7 +3,7 @@ import numpy as np
 import scipy
 import matplotlib.pyplot as plt
 
-from utilities import construct_sigmoid_array, polynomial_regression, polynomial_regression_with_regularization
+from utilities import *
 
 (countries, features, values) = a1.load_unicef_data()
 
@@ -28,14 +28,14 @@ new_x_test = construct_sigmoid_array(x_test, u, s)
 r = (0.01, 0.1, 1, 10, 100, 1000, 1000)
 
 # without regularization
-w, err_train, err_test =  polynomial_regression(new_x_train, t_train, new_x_test, t_test)
+w, err_train, err_test = polynomial_regression(new_x_train, t_train, new_x_test, t_test)
 # with regularization
 
 # Plot a curve showing learned function.
 # Use linspace to get a set of samples on which to evaluate
 x_ev = np.linspace(np.asscalar(min(x_test)), np.asscalar(max(x_test)), num=500)
 temp = x_ev.reshape(500, 1)
-temp = construct_sigmoid_array(temp, u, s)
+temp = add_constant(construct_sigmoid_array(temp, u, s))
 
 # TO DO:: Put your regression estimate here in place of x_ev.
 # Evaluate regression on the linspace samples.
